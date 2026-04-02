@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-lilac: #C8A2C8;
+  --color-light-blue: #ADD8E6;
+  --color-light-green: #90EE90;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-slate-50 text-slate-900 antialiased;
+  }
+}
+
+@layer components {
+  /* Theme Classes */
+  .theme-lilac { @apply bg-[#F8F4F8] text-[#4A2C4A]; }
+  .theme-lilac .bg-indigo-600 { @apply bg-[#A682A6]; }
+  .theme-lilac .text-indigo-600 { @apply text-[#8E628E]; }
+  
+  .theme-light-blue { @apply bg-[#F0F8FF] text-[#2C3E50]; }
+  .theme-light-blue .bg-indigo-600 { @apply bg-[#5DADE2]; }
+  .theme-light-blue .text-indigo-600 { @apply text-[#3498DB]; }
+
+  .theme-light-green { @apply bg-[#F5FFF5] text-[#2D5A27]; }
+  .theme-light-green .bg-indigo-600 { @apply bg-[#7DCEA0]; }
+  .theme-light-green .text-indigo-600 { @apply text-[#52BE80]; }
+
+  .large-text {
+    font-size: 1.25rem !important;
+  }
+  
+  .large-text h1 { font-size: 2.25rem !important; }
+  .large-text h2 { font-size: 1.875rem !important; }
+  .large-text h3 { font-size: 1.5rem !important; }
+  .large-text p, .large-text span, .large-text button, .large-text input { font-size: 1.125rem !important; }
+
+  .high-contrast {
+    @apply bg-black text-white;
+  }
+  
+  .high-contrast .bg-white, 
+  .high-contrast .bg-slate-50,
+  .high-contrast .bg-indigo-50,
+  .high-contrast .bg-rose-50,
+  .high-contrast .bg-emerald-50,
+  .high-contrast .bg-amber-50 {
+    @apply bg-slate-900 border-slate-700 text-white;
+  }
+
+  .high-contrast .text-slate-600,
+  .high-contrast .text-slate-500,
+  .high-contrast .text-slate-400 {
+    @apply text-slate-200;
+  }
+
+  .high-contrast .text-indigo-600,
+  .high-contrast .text-rose-600,
+  .high-contrast .text-emerald-600,
+  .high-contrast .text-amber-600 {
+    @apply text-indigo-400 font-bold;
+  }
+
+  .high-contrast border-slate-100,
+  .high-contrast border-slate-200 {
+    @apply border-slate-600;
+  }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
