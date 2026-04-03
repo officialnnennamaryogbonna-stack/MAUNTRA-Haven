@@ -10,11 +10,11 @@ interface LayoutProps {
 
 export function Layout({ children, onQuickExit }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col max-w-md mx-auto relative shadow-xl">
+    <div className="min-h-screen bg-white flex flex-col max-w-md mx-auto relative shadow-xl">
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 p-4 sticky top-0 z-50 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <Shield className="w-6 h-6 text-indigo-600" />
+          <img src="/logo.png" alt="Mauntra Haven Logo" className="w-8 h-8 object-contain" onError={(e) => e.currentTarget.style.display = 'none'} />
           <h1 className="font-semibold text-slate-800 tracking-tight">MAUNTRA Haven</h1>
         </div>
         <button
@@ -50,13 +50,13 @@ function NavButton({ to, icon, label }: { to: string; icon: React.ReactNode; lab
       to={to}
       className={({ isActive }) =>
         cn(
-          "flex flex-col items-center gap-1 transition-colors",
-          isActive ? "text-indigo-600" : "text-slate-400 hover:text-slate-600"
+          "flex flex-col items-center gap-1 transition-colors px-3 py-1 rounded-xl",
+          isActive ? "text-primary bg-primary/10" : "text-slate-400 hover:text-slate-600"
         )
       }
     >
       {icon}
-      <span className="text-[10px] font-medium uppercase tracking-wider">{label}</span>
+      <span className="text-[10px] font-bold uppercase tracking-wider">{label}</span>
     </NavLink>
   );
 }

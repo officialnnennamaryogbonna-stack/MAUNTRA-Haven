@@ -53,8 +53,8 @@ export function Onboarding({ onComplete }: OnboardingProps) {
             exit={{ opacity: 0, x: -20 }}
             className="flex-1 flex flex-col justify-center text-center space-y-6"
           >
-            <div className="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mx-auto">
-              <Shield className="w-10 h-10 text-indigo-600" />
+            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto shadow-sm">
+              <img src="/logo.png" alt="Mauntra Haven Logo" className="w-20 h-20 object-contain" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900">Welcome to MAUNTRA Haven</h1>
             <p className="text-slate-600 leading-relaxed">

@@ -24,7 +24,7 @@ export function Community() {
             className={cn(
               "flex-1 py-2.5 rounded-xl text-xs font-bold capitalize transition-all",
               activeTab === tab 
-                ? "bg-indigo-600 text-white shadow-md" 
+                ? "bg-primary text-white shadow-md" 
                 : "text-slate-500 hover:bg-slate-50"
             )}
           >
@@ -46,7 +46,7 @@ export function Community() {
               <div key={story.id} className="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm space-y-3">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600 font-bold text-xs">
+                    <div className="w-8 h-8 bg-primary-light rounded-full flex items-center justify-center text-primary font-bold text-xs">
                       {story.author[0]}
                     </div>
                     <span className="font-bold text-slate-800 text-sm">{story.author}</span>
@@ -75,7 +75,7 @@ export function Community() {
                   <button className="flex items-center gap-1 text-xs text-slate-400 hover:text-rose-500 transition-colors">
                     <Heart className="w-4 h-4" /> Support
                   </button>
-                  <button className="flex items-center gap-1 text-xs text-slate-400 hover:text-indigo-500 transition-colors">
+                  <button className="flex items-center gap-1 text-xs text-slate-400 hover:text-primary transition-colors">
                     <Share2 className="w-4 h-4" /> Share
                   </button>
                 </div>
@@ -92,9 +92,9 @@ export function Community() {
             exit={{ opacity: 0, y: -10 }}
             className="space-y-4"
           >
-            <div className="bg-indigo-50 p-4 rounded-3xl border border-indigo-100 flex items-start gap-3">
-              <Info className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
-              <p className="text-xs text-indigo-800 leading-relaxed">
+            <div className="bg-primary-light p-4 rounded-3xl border border-primary/10 flex items-start gap-3">
+              <Info className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <p className="text-xs text-slate-700 leading-relaxed">
                 Welcome to Chatspace. This is a safe, moderated space for survivors to connect. 
                 Please be respectful and avoid sharing personal contact details.
               </p>
@@ -110,7 +110,7 @@ export function Community() {
                 </div>
                 <div className="flex flex-col gap-1 max-w-[80%] self-end">
                   <span className="text-[10px] text-slate-400 mr-2 text-right">You</span>
-                  <div className="bg-indigo-600 p-3 rounded-2xl rounded-tr-none text-sm text-white">
+                  <div className="bg-primary p-3 rounded-2xl rounded-tr-none text-sm text-white">
                     Feeling a bit anxious today, but taking deep breaths.
                   </div>
                 </div>
@@ -121,9 +121,9 @@ export function Community() {
                   placeholder="Type a message..."
                   value={chatMessage}
                   onChange={(e) => setChatMessage(e.target.value)}
-                  className="flex-1 bg-slate-50 border-none rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="flex-1 bg-slate-50 border-none rounded-xl px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary"
                 />
-                <button className="p-2 bg-indigo-600 text-white rounded-xl shadow-md active:scale-95 transition-all">
+                <button className="p-2 bg-primary text-white rounded-xl shadow-md active:scale-95 transition-all">
                   <Send className="w-5 h-5" />
                 </button>
               </div>
@@ -150,7 +150,7 @@ export function Community() {
                   />
                   <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/40 transition-all">
                     <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
-                      <Play className="w-6 h-6 text-indigo-600 fill-indigo-600" />
+                      <Play className="w-6 h-6 text-primary fill-primary" />
                     </div>
                   </div>
                 </div>

@@ -20,7 +20,7 @@ export function Home({ nickname, contacts, settings }: HomeProps) {
       {/* Welcome Section */}
       <header className="space-y-2">
         <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
-          Hello, <span className="text-indigo-600">{nickname || 'Friend'}</span>
+          Hello, <span className="text-primary">{nickname || 'Friend'}</span>
         </h2>
         <p className="text-slate-500 leading-relaxed">
           You are safe here. How can we support you today?
@@ -66,17 +66,17 @@ export function Home({ nickname, contacts, settings }: HomeProps) {
       <div className="grid grid-cols-2 gap-4">
         <ShortcutCard
           to="/assistant"
-          icon={<MessageSquare className="w-6 h-6 text-indigo-600" />}
+          icon={<MessageSquare className="w-6 h-6 text-primary" />}
           label="MAUNTRA Assistant"
           description="AI Support"
-          color="bg-indigo-50"
+          color="bg-primary-light"
         />
         <ShortcutCard
           to="/support"
-          icon={<Shield className="w-6 h-6 text-emerald-600" />}
+          icon={<Shield className="w-6 h-6 text-tertiary" />}
           label="Support Services"
           description="Find Help"
-          color="bg-emerald-50"
+          color="bg-tertiary-light"
         />
       </div>
 
@@ -84,7 +84,7 @@ export function Home({ nickname, contacts, settings }: HomeProps) {
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="font-bold text-slate-800">Trusted Contacts</h3>
-          <Link to="/profile" className="text-indigo-600 text-sm font-semibold">Manage</Link>
+          <Link to="/profile" className="text-primary text-sm font-semibold">Manage</Link>
         </div>
         
         {contacts.length > 0 ? (

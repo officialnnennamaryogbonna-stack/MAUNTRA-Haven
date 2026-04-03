@@ -59,8 +59,8 @@ export function Emergency({ contacts, settings }: EmergencyProps) {
       {/* National Hotline */}
       <div className="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm space-y-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center">
-            <Shield className="w-5 h-5 text-indigo-600" />
+          <div className="w-10 h-10 bg-primary-light rounded-full flex items-center justify-center">
+            <Shield className="w-5 h-5 text-primary" />
           </div>
           <h3 className="font-bold text-slate-800">National DV Hotline</h3>
         </div>
@@ -70,13 +70,13 @@ export function Emergency({ contacts, settings }: EmergencyProps) {
         <div className="grid grid-cols-2 gap-3">
           <a 
             href={`tel:${currentEmergency.nationalHotline}`}
-            className="bg-indigo-600 text-white py-3 rounded-2xl font-bold text-sm shadow-md hover:bg-indigo-700 transition-colors flex items-center justify-center"
+            className="bg-primary text-white py-3 rounded-2xl font-bold text-sm shadow-md hover:opacity-90 transition-colors flex items-center justify-center"
           >
             Call Hotline
           </a>
           <a 
             href={`sms:${currentEmergency.textHotline.split(' ').pop()}?body=START`}
-            className="bg-white text-indigo-600 border border-indigo-200 py-3 rounded-2xl font-bold text-sm shadow-sm hover:bg-indigo-50 transition-colors flex items-center justify-center"
+            className="bg-white text-primary border border-primary/20 py-3 rounded-2xl font-bold text-sm shadow-sm hover:bg-primary-light transition-colors flex items-center justify-center"
           >
             Text START
           </a>
@@ -87,11 +87,11 @@ export function Emergency({ contacts, settings }: EmergencyProps) {
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="font-bold text-slate-800 flex items-center gap-2">
-            <ShieldAlert className="w-5 h-5 text-indigo-600" /> Custom Numbers
+            <ShieldAlert className="w-5 h-5 text-primary" /> Custom Numbers
           </h3>
           <button 
             onClick={() => setIsAdding(true)}
-            className="text-indigo-600 text-xs font-bold flex items-center gap-1"
+            className="text-primary text-xs font-bold flex items-center gap-1"
           >
             <Plus className="w-4 h-4" /> Add New
           </button>
@@ -111,7 +111,7 @@ export function Emergency({ contacts, settings }: EmergencyProps) {
                 required
                 value={newNumber.label}
                 onChange={e => setNewNumber({...newNumber, label: e.target.value})}
-                className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary"
               />
               <input
                 placeholder="Phone Number"
@@ -119,12 +119,12 @@ export function Emergency({ contacts, settings }: EmergencyProps) {
                 type="tel"
                 value={newNumber.number}
                 onChange={e => setNewNumber({...newNumber, number: e.target.value})}
-                className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary"
               />
               <div className="flex gap-2">
                 <button 
                   type="submit"
-                  className="flex-1 bg-indigo-600 text-white py-2 rounded-xl text-sm font-bold flex items-center justify-center gap-2"
+                  className="flex-1 bg-primary text-white py-2 rounded-xl text-sm font-bold flex items-center justify-center gap-2"
                 >
                   <Save className="w-4 h-4" /> Save Number
                 </button>
@@ -145,11 +145,11 @@ export function Emergency({ contacts, settings }: EmergencyProps) {
             <motion.div
               key={custom.id}
               whileTap={{ scale: 0.98 }}
-              className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between hover:border-indigo-100 transition-all"
+              className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between hover:border-primary/20 transition-all"
             >
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-indigo-600" />
+                <div className="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center">
+                  <Phone className="w-5 h-5 text-primary" />
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-800 text-sm">{custom.label}</h4>
@@ -159,7 +159,7 @@ export function Emergency({ contacts, settings }: EmergencyProps) {
               <div className="flex items-center gap-2">
                 <a 
                   href={`tel:${custom.number}`}
-                  className="p-3 bg-emerald-50 text-emerald-600 rounded-full hover:bg-emerald-100 transition-colors"
+                  className="p-3 bg-tertiary-light text-tertiary rounded-full hover:bg-tertiary/20 transition-colors"
                 >
                   <Phone className="w-5 h-5" />
                 </a>
@@ -187,7 +187,7 @@ export function Emergency({ contacts, settings }: EmergencyProps) {
               <motion.div
                 key={contact.id}
                 whileTap={{ scale: 0.98 }}
-                className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between hover:border-indigo-100 transition-all"
+                className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between hover:border-primary/20 transition-all"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center font-bold text-slate-400">
@@ -200,7 +200,7 @@ export function Emergency({ contacts, settings }: EmergencyProps) {
                 </div>
                 <a 
                   href={`tel:${contact.phone}`}
-                  className="p-3 bg-emerald-50 text-emerald-600 rounded-full hover:bg-emerald-100 transition-colors"
+                  className="p-3 bg-tertiary-light text-tertiary rounded-full hover:bg-tertiary/20 transition-colors"
                 >
                   <Phone className="w-5 h-5" />
                 </a>
@@ -210,7 +210,7 @@ export function Emergency({ contacts, settings }: EmergencyProps) {
         ) : (
           <div className="bg-slate-50 p-6 rounded-3xl border border-dashed border-slate-300 text-center space-y-2">
             <p className="text-sm text-slate-500">No trusted contacts added yet.</p>
-            <Link to="/profile" className="text-indigo-600 text-sm font-bold flex items-center gap-1 mx-auto w-fit">
+            <Link to="/profile" className="text-primary text-sm font-bold flex items-center gap-1 mx-auto w-fit">
               Add Now <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

@@ -100,7 +100,7 @@ export function ReportIncident() {
         </div>
         <button
           onClick={() => navigate('/')}
-          className="w-full max-w-xs bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-indigo-100 active:scale-95 transition-all"
+          className="w-full max-w-xs bg-primary text-white py-4 rounded-2xl font-bold shadow-lg shadow-primary/20 active:scale-95 transition-all"
         >
           Return Home
         </button>
@@ -129,15 +129,15 @@ export function ReportIncident() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="bg-amber-50 border border-amber-100 p-5 rounded-3xl space-y-4 shadow-sm"
+            className="bg-secondary-light border border-secondary/10 p-5 rounded-3xl space-y-4 shadow-sm"
           >
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center shrink-0">
-                <AlertCircle className="w-5 h-5 text-amber-600" />
+              <div className="w-10 h-10 bg-secondary-light rounded-xl flex items-center justify-center shrink-0">
+                <AlertCircle className="w-5 h-5 text-secondary" />
               </div>
               <div className="space-y-1">
-                <h4 className="font-bold text-amber-900 text-sm">Unfinished Draft Found</h4>
-                <p className="text-xs text-amber-800/80 leading-relaxed">
+                <h4 className="font-bold text-secondary text-sm">Unfinished Draft Found</h4>
+                <p className="text-xs text-secondary/80 leading-relaxed">
                   We found an unfinished report from your last visit. Would you like to resume it or start a new one?
                 </p>
               </div>
@@ -145,13 +145,13 @@ export function ReportIncident() {
             <div className="flex gap-2">
               <button
                 onClick={handleResume}
-                className="flex-1 bg-amber-600 text-white py-2.5 rounded-xl text-xs font-bold shadow-md shadow-amber-100 active:scale-95 transition-all"
+                className="flex-1 bg-secondary text-white py-2.5 rounded-xl text-xs font-bold shadow-md shadow-secondary/20 active:scale-95 transition-all"
               >
                 Resume Draft
               </button>
               <button
                 onClick={handleStartNew}
-                className="flex-1 bg-white text-amber-700 border border-amber-200 py-2.5 rounded-xl text-xs font-bold active:scale-95 transition-all"
+                className="flex-1 bg-white text-secondary border border-secondary/20 py-2.5 rounded-xl text-xs font-bold active:scale-95 transition-all"
               >
                 Start New
               </button>
@@ -164,14 +164,14 @@ export function ReportIncident() {
         {/* Incident Type */}
         <div className="space-y-2">
           <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
-            <ShieldAlert className="w-4 h-4 text-indigo-500" /> Type of Incident
+            <ShieldAlert className="w-4 h-4 text-primary" /> Type of Incident
           </label>
           <select
             name="type"
             required
             value={formData.type}
             onChange={handleChange}
-            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all shadow-sm"
+            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all shadow-sm"
           >
             <option value="">Select type...</option>
             <option value="Physical">Physical</option>
@@ -187,7 +187,7 @@ export function ReportIncident() {
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-indigo-500" /> Date
+              <Calendar className="w-4 h-4 text-primary" /> Date
             </label>
             <input
               type="date"
@@ -195,12 +195,12 @@ export function ReportIncident() {
               required
               value={formData.date}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all shadow-sm"
+              className="w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all shadow-sm"
             />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
-              <Clock className="w-4 h-4 text-indigo-500" /> Time
+              <Clock className="w-4 h-4 text-primary" /> Time
             </label>
             <input
               type="time"
@@ -208,7 +208,7 @@ export function ReportIncident() {
               required
               value={formData.time}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all shadow-sm"
+              className="w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all shadow-sm"
             />
           </div>
         </div>
@@ -216,7 +216,7 @@ export function ReportIncident() {
         {/* Location */}
         <div className="space-y-2">
           <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-indigo-500" /> Location
+            <MapPin className="w-4 h-4 text-primary" /> Location
           </label>
           <input
             type="text"
@@ -224,14 +224,14 @@ export function ReportIncident() {
             placeholder="Where did it happen?"
             value={formData.location}
             onChange={handleChange}
-            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all shadow-sm"
+            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all shadow-sm"
           />
         </div>
 
         {/* Description */}
         <div className="space-y-2">
           <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
-            <FileText className="w-4 h-4 text-indigo-500" /> Description
+            <FileText className="w-4 h-4 text-primary" /> Description
           </label>
           <textarea
             name="description"
@@ -239,7 +239,7 @@ export function ReportIncident() {
             placeholder="Describe what happened..."
             value={formData.description}
             onChange={handleChange}
-            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all shadow-sm resize-none"
+            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all shadow-sm resize-none"
           />
         </div>
 
@@ -256,8 +256,8 @@ export function ReportIncident() {
                   "py-3 rounded-xl text-xs font-bold border transition-all",
                   formData.urgency === level 
                     ? level === 'High' ? "bg-rose-600 border-rose-600 text-white" :
-                      level === 'Medium' ? "bg-amber-500 border-amber-500 text-white" :
-                      "bg-emerald-600 border-emerald-600 text-white"
+                      level === 'Medium' ? "bg-secondary border-secondary text-white" :
+                      "bg-tertiary border-tertiary text-white"
                     : "bg-white border-slate-200 text-slate-500"
                 )}
               >
@@ -270,7 +270,7 @@ export function ReportIncident() {
         {/* Evidence Placeholder */}
         <div className="space-y-2">
           <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
-            <Upload className="w-4 h-4 text-indigo-500" /> Evidence (Optional)
+            <Upload className="w-4 h-4 text-primary" /> Evidence (Optional)
           </label>
           <div className="border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center space-y-2 bg-slate-50/50">
             <Upload className="w-8 h-8 text-slate-300 mx-auto" />
@@ -291,7 +291,7 @@ export function ReportIncident() {
           </button>
           <button
             type="submit"
-            className="flex items-center justify-center gap-2 bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-indigo-100 active:scale-95 transition-all"
+            className="flex items-center justify-center gap-2 bg-primary text-white py-4 rounded-2xl font-bold shadow-lg shadow-primary/20 active:scale-95 transition-all"
           >
             <Send className="w-4 h-4" /> Submit
           </button>

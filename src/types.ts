@@ -66,3 +66,10 @@ export interface CustomEmergencyNumber {
   label: string;
   number: string;
 }
+
+export interface CallCenterContact {
+  name: string;
+  phone: string;
+  specialty?: string;
+  type?: string;
+}

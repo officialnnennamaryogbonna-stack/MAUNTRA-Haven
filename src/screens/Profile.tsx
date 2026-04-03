@@ -43,8 +43,8 @@ export function Profile({ settings, setSettings, contacts, setContacts }: Profil
   return (
     <div className="p-6 space-y-8 pb-24">
       <header className="flex items-center gap-4">
-        <div className="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center border-2 border-white shadow-sm">
-          <User className="w-8 h-8 text-indigo-600" />
+        <div className="w-16 h-16 bg-primary-light rounded-full flex items-center justify-center border-2 border-white shadow-sm">
+          <User className="w-8 h-8 text-primary" />
         </div>
         <div>
           <h2 className="text-2xl font-bold text-slate-900">{settings.nickname}</h2>
@@ -52,47 +52,20 @@ export function Profile({ settings, setSettings, contacts, setContacts }: Profil
         </div>
       </header>
 
-      {/* App Theme */}
-      <section className="space-y-4">
-        <h3 className="font-bold text-slate-800 flex items-center gap-2">
-          <Palette className="w-5 h-5 text-indigo-600" /> App Theme
-        </h3>
-        <div className="grid grid-cols-4 gap-3">
-          {[
-            { id: 'default', label: 'White', color: 'bg-white border-slate-200' },
-            { id: 'lilac', label: 'Lilac', color: 'bg-[#C8A2C8] border-[#A682A6]' },
-            { id: 'light-blue', label: 'Blue', color: 'bg-[#ADD8E6] border-[#5DADE2]' },
-            { id: 'light-green', label: 'Green', color: 'bg-[#90EE90] border-[#7DCEA0]' },
-          ].map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setTheme(t.id as any)}
-              className={cn(
-                "flex flex-col items-center gap-2 p-2 rounded-2xl border-2 transition-all",
-                settings.theme === t.id ? "border-indigo-600 scale-105 shadow-sm" : "border-transparent opacity-70"
-              )}
-            >
-              <div className={cn("w-10 h-10 rounded-full shadow-inner", t.color)} />
-              <span className="text-[10px] font-bold text-slate-600">{t.label}</span>
-            </button>
-          ))}
-        </div>
-      </section>
-
       {/* App Info & Games */}
       <section className="grid grid-cols-2 gap-4">
         <Link 
           to="/about"
           className="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm flex flex-col items-center gap-2 hover:bg-slate-50 transition-colors"
         >
-          <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center">
-            <Info className="w-5 h-5 text-indigo-600" />
+          <div className="w-10 h-10 bg-primary-light rounded-xl flex items-center justify-center">
+            <Info className="w-5 h-5 text-primary" />
           </div>
           <span className="text-sm font-bold text-slate-800">About App</span>
         </Link>
         <div className="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm flex flex-col items-center gap-2 relative opacity-80">
-          <div className="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center">
-            <Gamepad2 className="w-5 h-5 text-amber-600" />
+          <div className="w-10 h-10 bg-secondary-light rounded-xl flex items-center justify-center">
+            <Gamepad2 className="w-5 h-5 text-secondary" />
           </div>
           <span className="text-sm font-bold text-slate-800">Games</span>
           <span className="absolute -top-2 -right-2 bg-rose-500 text-white text-[8px] font-bold px-2 py-1 rounded-full shadow-sm">SOON</span>
@@ -104,7 +77,7 @@ export function Profile({ settings, setSettings, contacts, setContacts }: Profil
         {/* Privacy & Safety */}
         <section className="space-y-4">
           <h3 className="font-bold text-slate-800 flex items-center gap-2">
-            <Shield className="w-5 h-5 text-indigo-600" /> Privacy & Safety
+            <Shield className="w-5 h-5 text-primary" /> Privacy & Safety
           </h3>
           <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
             <SettingToggle 
@@ -124,7 +97,7 @@ export function Profile({ settings, setSettings, contacts, setContacts }: Profil
               <select 
                 value={settings.country}
                 onChange={(e) => setSettings({ ...settings, country: e.target.value })}
-                className="text-sm font-bold text-indigo-600 bg-transparent outline-none"
+                className="text-sm font-bold text-primary bg-transparent outline-none"
               >
                 <option>Nigeria</option>
                 <option>United States</option>
@@ -143,7 +116,7 @@ export function Profile({ settings, setSettings, contacts, setContacts }: Profil
             </h3>
             <button 
               onClick={() => setIsAddingContact(true)}
-              className="text-indigo-600 text-xs font-bold flex items-center gap-1"
+              className="text-primary text-xs font-bold flex items-center gap-1"
             >
               <Plus className="w-4 h-4" /> Add New
             </button>
@@ -161,24 +134,24 @@ export function Profile({ settings, setSettings, contacts, setContacts }: Profil
                   placeholder="Name"
                   value={newContact.name}
                   onChange={e => setNewContact({...newContact, name: e.target.value})}
-                  className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary"
                 />
                 <input
                   placeholder="Phone Number"
                   value={newContact.phone}
                   onChange={e => setNewContact({...newContact, phone: e.target.value})}
-                  className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary"
                 />
                 <input
                   placeholder="Relation (e.g. Sister, Friend)"
                   value={newContact.relation}
                   onChange={e => setNewContact({...newContact, relation: e.target.value})}
-                  className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary"
                 />
                 <div className="flex gap-2">
                   <button 
                     onClick={handleAddContact}
-                    className="flex-1 bg-indigo-600 text-white py-2 rounded-xl text-sm font-bold"
+                    className="flex-1 bg-primary text-white py-2 rounded-xl text-sm font-bold"
                   >
                     Save Contact
                   </button>
@@ -233,7 +206,7 @@ export function Profile({ settings, setSettings, contacts, setContacts }: Profil
         {/* Accessibility */}
         <section className="space-y-4">
           <h3 className="font-bold text-slate-800 flex items-center gap-2">
-            <Eye className="w-5 h-5 text-emerald-600" /> Accessibility
+            <Eye className="w-5 h-5 text-tertiary" /> Accessibility
           </h3>
           <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
             <SettingToggle 
@@ -270,7 +243,7 @@ function SettingToggle({ label, description, enabled, onToggle }: { label: strin
         onClick={onToggle}
         className={cn(
           "w-12 h-6 rounded-full transition-all relative",
-          enabled ? "bg-indigo-600" : "bg-slate-200"
+          enabled ? "bg-primary" : "bg-slate-200"
         )}
       >
         <div className={cn(

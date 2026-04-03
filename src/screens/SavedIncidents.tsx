@@ -40,8 +40,8 @@ export function SavedIncidents() {
                   <span className={cn(
                     "text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full",
                     incident.urgency === 'High' ? "bg-rose-50 text-rose-600" :
-                    incident.urgency === 'Medium' ? "bg-amber-50 text-amber-600" :
-                    "bg-emerald-50 text-emerald-600"
+                    incident.urgency === 'Medium' ? "bg-secondary-light text-secondary" :
+                    "bg-tertiary-light text-tertiary"
                   )}>
                     {incident.urgency} Urgency
                   </span>
@@ -57,16 +57,16 @@ export function SavedIncidents() {
 
               <div className="grid grid-cols-2 gap-3 text-xs text-slate-500">
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-3.5 h-3.5" />
+                  <Calendar className="w-3.5 h-3.5 text-primary" />
                   {incident.date}
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock className="w-3.5 h-3.5" />
+                  <Clock className="w-3.5 h-3.5 text-primary" />
                   {incident.time}
                 </div>
                 {incident.location && (
                   <div className="flex items-center gap-2 col-span-2">
-                    <MapPin className="w-3.5 h-3.5" />
+                    <MapPin className="w-3.5 h-3.5 text-primary" />
                     {incident.location}
                   </div>
                 )}
@@ -87,7 +87,7 @@ export function SavedIncidents() {
             <p className="text-slate-500 font-medium">No saved incidents found.</p>
             <button 
               onClick={() => navigate('/report-incident')}
-              className="text-indigo-600 font-bold text-sm"
+              className="text-primary font-bold text-sm"
             >
               Report an Incident
             </button>

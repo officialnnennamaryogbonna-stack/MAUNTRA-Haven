@@ -17,8 +17,8 @@ export function About() {
       <section className="space-y-4">
         <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm space-y-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center">
-              <Shield className="w-6 h-6 text-indigo-600" />
+            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+              <img src="/logo.png" alt="Mauntra Haven Logo" className="w-12 h-12 object-contain" />
             </div>
             <div>
               <h3 className="font-bold text-slate-900">What is Mauntra?</h3>
@@ -53,7 +53,7 @@ export function About() {
             {
               title: "What is Domestic Violence?",
               desc: "Domestic violence is a pattern of behavior used by one person to gain power and control over another in an intimate relationship.",
-              icon: <HelpCircle className="w-5 h-5 text-indigo-600" />
+              icon: <HelpCircle className="w-5 h-5 text-primary" />
             },
             {
               title: "Types of Abuse",
@@ -63,7 +63,7 @@ export function About() {
             {
               title: "The Cycle of Violence",
               desc: "Abuse often follows a cycle: tension building, the incident, and the 'honeymoon' phase. It tends to escalate over time.",
-              icon: <Heart className="w-5 h-5 text-emerald-500" />
+              icon: <Heart className="w-5 h-5 text-tertiary" />
             }
           ].map((item, index) => (
             <motion.div
@@ -90,7 +90,7 @@ export function About() {
       {/* External Resources */}
       <section className="space-y-4">
         <h3 className="font-bold text-slate-800 flex items-center gap-2">
-          <ExternalLink className="w-5 h-5 text-indigo-600" /> Learn More
+          <ExternalLink className="w-5 h-5 text-primary" /> Learn More
         </h3>
         <div className="bg-slate-900 text-white p-6 rounded-[2.5rem] space-y-4">
           <p className="text-sm text-slate-300 leading-relaxed">

@@ -3,30 +3,30 @@
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --color-lilac: #C8A2C8;
-  --color-light-blue: #ADD8E6;
-  --color-light-green: #90EE90;
+  --color-primary: #C8A2C8;
+  --color-secondary: #ADD8E6;
+  --color-tertiary: #90EE90;
 }
 
 @layer base {
   body {
-    @apply font-sans bg-slate-50 text-slate-900 antialiased;
+    @apply font-sans bg-white text-slate-900 antialiased;
   }
 }
 
 @layer components {
-  /* Theme Classes */
-  .theme-lilac { @apply bg-[#F8F4F8] text-[#4A2C4A]; }
-  .theme-lilac .bg-indigo-600 { @apply bg-[#A682A6]; }
-  .theme-lilac .text-indigo-600 { @apply text-[#8E628E]; }
+  /* Unified Theme Styles */
+  .btn-primary { @apply bg-primary text-white shadow-md hover:opacity-90 transition-all active:scale-95; }
+  .btn-secondary { @apply bg-secondary text-slate-800 shadow-sm hover:opacity-90 transition-all active:scale-95; }
+  .btn-tertiary { @apply bg-tertiary text-slate-800 shadow-sm hover:opacity-90 transition-all active:scale-95; }
   
-  .theme-light-blue { @apply bg-[#F0F8FF] text-[#2C3E50]; }
-  .theme-light-blue .bg-indigo-600 { @apply bg-[#5DADE2]; }
-  .theme-light-blue .text-indigo-600 { @apply text-[#3498DB]; }
+  .text-primary { @apply text-primary; }
+  .text-secondary { @apply text-secondary; }
+  .text-tertiary { @apply text-tertiary; }
 
-  .theme-light-green { @apply bg-[#F5FFF5] text-[#2D5A27]; }
-  .theme-light-green .bg-indigo-600 { @apply bg-[#7DCEA0]; }
-  .theme-light-green .text-indigo-600 { @apply text-[#52BE80]; }
+  .bg-primary-light { @apply bg-primary/10; }
+  .bg-secondary-light { @apply bg-secondary/10; }
+  .bg-tertiary-light { @apply bg-tertiary/10; }
 
   .large-text {
     font-size: 1.25rem !important;
@@ -43,9 +43,10 @@
   
   .high-contrast .bg-white, 
   .high-contrast .bg-slate-50,
-  .high-contrast .bg-indigo-50,
+  .high-contrast .bg-primary-light,
+  .high-contrast .bg-secondary-light,
+  .high-contrast .bg-tertiary-light,
   .high-contrast .bg-rose-50,
-  .high-contrast .bg-emerald-50,
   .high-contrast .bg-amber-50 {
     @apply bg-slate-900 border-slate-700 text-white;
   }
@@ -56,11 +57,12 @@
     @apply text-slate-200;
   }
 
-  .high-contrast .text-indigo-600,
+  .high-contrast .text-primary,
+  .high-contrast .text-secondary,
+  .high-contrast .text-tertiary,
   .high-contrast .text-rose-600,
-  .high-contrast .text-emerald-600,
   .high-contrast .text-amber-600 {
-    @apply text-indigo-400 font-bold;
+    @apply text-primary font-bold;
   }
 
   .high-contrast border-slate-100,

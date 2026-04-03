@@ -1,53 +1,37 @@
-import { SupportService, Story, PositiveVideo } from './types';
+import { SupportService, Story, PositiveVideo, CallCenterContact } from './types';
 
 export const MOCK_SERVICES: SupportService[] = [
   {
-    id: '1',
-    name: 'Safe Haven Shelter',
-    type: 'Shelter',
-    contact: '1-800-SAFE',
-    location: 'Downtown Area',
-    description: 'Emergency housing and 24/7 support for survivors.'
-  },
-  {
-    id: '2',
-    name: 'Justice Legal Aid',
+    id: '7',
+    name: 'DSVRT Lagos',
     type: 'Legal',
-    contact: '555-0123',
-    location: 'Legal District',
-    description: 'Free legal representation and advice for protection orders.'
+    contact: '08000333333',
+    location: 'Lagos State, Nigeria',
+    description: 'Lagos State Domestic and Sexual Violence Response Team. Providing legal, medical, and psychological support.'
   },
   {
-    id: '3',
-    name: 'Healing Hearts Counseling',
-    type: 'Counseling',
-    contact: '555-4567',
-    location: 'Wellness Center',
-    description: 'Trauma-informed therapy and support groups.'
-  },
-  {
-    id: '4',
-    name: 'Community Health Clinic',
+    id: '8',
+    name: 'WARIF Nigeria',
     type: 'Health',
-    contact: '555-9999',
-    location: 'East Side',
-    description: 'Confidential medical care and forensic exams.'
+    contact: '+2348092100009',
+    location: 'Lagos, Nigeria',
+    description: 'Women at Risk International Foundation. Specialized care for survivors of sexual violence and abuse.'
   },
   {
-    id: '5',
-    name: 'Coach Sarah - Life Coach',
+    id: '9',
+    name: 'Project Alert',
     type: 'Counseling',
-    contact: '555-8888',
-    location: 'Online/Remote',
-    description: 'Empowerment coaching and life transition support for survivors.'
+    contact: '+2348052096701',
+    location: 'Lagos, Nigeria',
+    description: 'NGO providing shelter, counseling, and legal aid to women and girls victims of violence.'
   },
   {
-    id: '6',
-    name: 'Dr. Arinze - Trauma Therapist',
-    type: 'Counseling',
-    contact: '555-7777',
-    location: 'Lagos Wellness Hub',
-    description: 'Specialized clinical therapy for domestic violence recovery.'
+    id: '10',
+    name: 'FIDA Nigeria',
+    type: 'Legal',
+    contact: '+2347088496115',
+    location: 'Abuja/Lagos, Nigeria',
+    description: 'International Federation of Women Lawyers. Providing free legal services to women and children.'
   }
 ];
 
@@ -113,3 +97,24 @@ export const EMERGENCY_INFO: Record<string, { hotline: string; nationalHotline: 
     textHotline: 'Search local help'
   }
 };
+
+export const LIFE_COACHES: CallCenterContact[] = [
+  { name: 'Mr. Alex', phone: '+2349032799212' },
+  { name: 'Miss Nnenna', phone: '+2348063498112' },
+  { name: 'Mr. Innocent', phone: '+2347069721871' },
+  { name: 'Miss Sekinat', phone: '+447300465487' },
+  { name: 'Miss Chidinma', phone: '+2349032455620' }
+];
+
+export const THERAPISTS: CallCenterContact[] = [
+  { name: 'Dr. Arinze', phone: '+2345557777', specialty: 'Trauma Specialist' },
+  { name: 'Dr. Sarah', phone: '+2345558888', specialty: 'Family Therapist' },
+  { name: 'Dr. Emeka', phone: '+2345559999', specialty: 'Clinical Psychologist' }
+];
+
+export const DV_ORGANIZATIONS_NIGERIA: CallCenterContact[] = [
+  { name: 'DSVRT Lagos', phone: '08000333333', type: 'Government/NGO' },
+  { name: 'WARIF Nigeria', phone: '+2348092100009', type: 'NGO' },
+  { name: 'Project Alert', phone: '+2348052096701', type: 'NGO' },
+  { name: 'FIDA Nigeria', phone: '+2347088496115', type: 'Legal' }
+];

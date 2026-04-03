@@ -53,12 +53,9 @@ export default function App() {
   return (
     <Router>
       <div className={cn(
-        "min-h-screen transition-all duration-300",
+        "min-h-screen transition-all duration-300 bg-white",
         settings.largeText && "large-text",
-        settings.highContrast && "high-contrast",
-        settings.theme === 'lilac' && "theme-lilac",
-        settings.theme === 'light-blue' && "theme-light-blue",
-        settings.theme === 'light-green' && "theme-light-green"
+        settings.highContrast && "high-contrast"
       )}>
         <Layout onQuickExit={handleQuickExit}>
           <Routes>

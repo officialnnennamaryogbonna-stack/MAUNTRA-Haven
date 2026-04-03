@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Search, MapPin, Phone, ExternalLink, Filter, AlertCircle, ChevronRight, X, FileText } from 'lucide-react';
-import { MOCK_SERVICES } from '../constants';
+import { MOCK_SERVICES, LIFE_COACHES, THERAPISTS, EMERGENCY_INFO } from '../constants';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { SupportService, Incident } from '../types';
+import { SupportService, Incident, CallCenterContact } from '../types';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export function Support() {
@@ -15,6 +15,7 @@ export function Support() {
   const [filter, setFilter] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedService, setSelectedService] = useState<SupportService | null>(null);
+  const [callCategory, setCallCategory] = useState<'Coaches' | 'Therapists' | 'Emergency'>('Coaches');
 
   const filteredServices = MOCK_SERVICES.filter(service => {
     const matchesFilter = filter === 'All' || service.type === filter;
@@ -25,17 +26,78 @@ export function Support() {
 
   const categories = ['All', 'Shelter', 'Legal', 'Counseling', 'Health'];
 
+  const getCallContacts = (): CallCenterContact[] => {
+    if (callCategory === 'Coaches') return LIFE_COACHES;
+    if (callCategory === 'Therapists') return THERAPISTS;
+    
+    // For emergency, we'll use the Nigeria national hotline as a contact
+    const nigeriaEmergency = EMERGENCY_INFO['Nigeria'];
+    return [
+      { name: 'National Hotline', phone: nigeriaEmergency.nationalHotline, type: 'Emergency' },
+      { name: 'Emergency Services', phone: nigeriaEmergency.hotline, type: 'Emergency' },
+      { name: 'Text Hotline', phone: nigeriaEmergency.textHotline, type: 'Emergency' }
+    ];
+  };
+
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-8 pb-24">
       <header className="space-y-2">
-        <h2 className="text-2xl font-bold text-slate-900">Support Services</h2>
+        <h2 className="text-2xl font-bold text-slate-900">Support Center</h2>
         <p className="text-slate-500 text-sm">Find trusted organizations and resources near you.</p>
       </header>
+
+      {/* Call Center Section */}
+      <section className="space-y-4">
+        <h3 className="font-bold text-slate-800 flex items-center gap-2">
+          <Phone className="w-5 h-5 text-primary" /> Call Center
+        </h3>
+        <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm space-y-6">
+          <div className="flex p-1 bg-slate-50 rounded-2xl">
+            {(['Coaches', 'Therapists', 'Emergency'] as const).map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setCallCategory(cat)}
+                className={cn(
+                  "flex-1 py-2 text-xs font-bold rounded-xl transition-all",
+                  callCategory === cat 
+                    ? "bg-white text-primary shadow-sm" 
+                    : "text-slate-400 hover:text-slate-600"
+                )}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <div className="space-y-3">
+            {getCallContacts().map((contact, idx) => (
+              <motion.div 
+                key={contact.name + idx}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: idx * 0.05 }}
+                className="flex items-center justify-between p-3 bg-slate-50/50 rounded-2xl border border-slate-100"
+              >
+                <div>
+                  <p className="text-sm font-bold text-slate-800">{contact.name}</p>
+                  <p className="text-[10px] text-slate-400 font-medium">{contact.specialty || contact.type || 'Professional Support'}</p>
+                </div>
+                <a 
+                  href={`tel:${contact.phone}`}
+                  className="w-10 h-10 bg-primary-light text-primary rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Report Incident CTA */}
       <Link 
         to="/report-incident"
-        className="flex items-center justify-between p-5 bg-rose-600 text-white rounded-3xl shadow-lg shadow-rose-100 group active:scale-[0.98] transition-all"
+        className="flex items-center justify-between p-5 bg-primary text-white rounded-3xl shadow-lg shadow-primary/20 group active:scale-[0.98] transition-all"
       >
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
@@ -43,16 +105,16 @@ export function Support() {
           </div>
           <div>
             <h3 className="font-bold">Report an Incident</h3>
-            <p className="text-xs text-rose-100">Securely document what happened</p>
+            <p className="text-xs text-white/80">Securely document what happened</p>
           </div>
         </div>
-        <ChevronRight className="w-5 h-5 text-rose-200 group-hover:translate-x-1 transition-transform" />
+        <ChevronRight className="w-5 h-5 text-white/60 group-hover:translate-x-1 transition-transform" />
       </Link>
 
       {/* Safety Records */}
       <section className="space-y-4">
         <h3 className="font-bold text-slate-800 flex items-center gap-2">
-          <FileText className="w-5 h-5 text-rose-600" /> Safety Records
+          <FileText className="w-5 h-5 text-primary" /> Safety Records
         </h3>
         <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
           <button 
@@ -60,8 +122,8 @@ export function Support() {
             className="w-full p-5 flex items-center justify-between border-b border-slate-50 hover:bg-slate-50 transition-colors"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-rose-50 rounded-xl flex items-center justify-center">
-                <FileText className="w-5 h-5 text-rose-600" />
+              <div className="w-10 h-10 bg-primary-light rounded-xl flex items-center justify-center">
+                <FileText className="w-5 h-5 text-primary" />
               </div>
               <div className="text-left">
                 <p className="text-sm font-bold text-slate-800">Saved Incidents</p>
@@ -77,8 +139,8 @@ export function Support() {
               className="w-full p-5 flex items-center justify-between hover:bg-slate-50 transition-colors"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center">
-                  <AlertCircle className="w-5 h-5 text-amber-600" />
+                <div className="w-10 h-10 bg-secondary-light rounded-xl flex items-center justify-center">
+                  <AlertCircle className="w-5 h-5 text-secondary" />
                 </div>
                 <div className="text-left">
                   <p className="text-sm font-bold text-slate-800">Unfinished Draft</p>
@@ -100,7 +162,7 @@ export function Support() {
             placeholder="Search services..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all shadow-sm"
+            className="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all shadow-sm"
           />
         </div>
 
@@ -112,8 +174,8 @@ export function Support() {
               className={cn(
                 "px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all",
                 filter === cat 
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" 
-                  : "bg-white text-slate-600 border border-slate-200 hover:border-indigo-200"
+                  ? "bg-primary text-white shadow-md shadow-primary/20" 
+                  : "bg-white text-slate-600 border border-slate-200 hover:border-primary/50"
               )}
             >
               {cat}
@@ -139,14 +201,14 @@ export function Support() {
                     "text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full",
                     service.type === 'Shelter' ? "bg-rose-50 text-rose-600" :
                     service.type === 'Legal' ? "bg-blue-50 text-blue-600" :
-                    service.type === 'Counseling' ? "bg-emerald-50 text-emerald-600" :
-                    "bg-amber-50 text-amber-600"
+                    service.type === 'Counseling' ? "bg-secondary-light text-secondary" :
+                    "bg-tertiary-light text-tertiary"
                   )}>
                     {service.type}
                   </span>
                   <h3 className="font-bold text-slate-900">{service.name}</h3>
                 </div>
-                <button className="p-2 bg-slate-50 rounded-full text-slate-400 hover:text-indigo-600 transition-colors">
+                <button className="p-2 bg-slate-50 rounded-full text-slate-400 hover:text-primary transition-colors">
                   <ExternalLink className="w-4 h-4" />
                 </button>
               </div>
@@ -158,7 +220,7 @@ export function Support() {
               <div className="pt-4 border-t border-slate-50 flex items-center justify-between">
                 <button 
                   onClick={() => setSelectedService(service)}
-                  className="text-indigo-600 text-xs font-bold hover:underline"
+                  className="text-primary text-xs font-bold hover:underline"
                 >
                   View Details
                 </button>
@@ -174,7 +236,7 @@ export function Support() {
                   </a>
                   <a 
                     href={`tel:${service.contact}`}
-                    className="flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-indigo-100 transition-colors"
+                    className="flex items-center gap-2 bg-primary-light text-primary px-4 py-2 rounded-xl text-xs font-bold hover:bg-primary/20 transition-colors"
                   >
                     <Phone className="w-3.5 h-3.5" />
                     Call
@@ -205,7 +267,7 @@ export function Support() {
             >
               <div className="flex justify-between items-start">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-full">
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-primary-light text-primary rounded-full">
                     {selectedService.type}
                   </span>
                   <h3 className="text-2xl font-bold text-slate-900">{selectedService.name}</h3>
@@ -243,7 +305,7 @@ export function Support() {
               <div className="grid grid-cols-2 gap-3 pt-4">
                 <a 
                   href={`tel:${selectedService.contact}`}
-                  className="bg-indigo-600 text-white py-4 rounded-2xl font-bold text-center shadow-lg shadow-indigo-100 active:scale-95 transition-all"
+                  className="bg-primary text-white py-4 rounded-2xl font-bold text-center shadow-lg shadow-primary/20 active:scale-95 transition-all"
                 >
                   Call Now
                 </a>
@@ -251,7 +313,7 @@ export function Support() {
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedService.name + ' ' + selectedService.location)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white text-indigo-600 border border-indigo-100 py-4 rounded-2xl font-bold text-center active:scale-95 transition-all"
+                  className="bg-white text-primary border border-primary/20 py-4 rounded-2xl font-bold text-center active:scale-95 transition-all"
                 >
                   Directions
                 </a>
