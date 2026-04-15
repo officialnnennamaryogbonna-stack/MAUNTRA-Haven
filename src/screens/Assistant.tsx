@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, Send, Shield, Info, Loader2, User, Sparkles } from 'lucide-react';
+import { MessageSquare, Send, Shield, Info, Loader2, User, Sparkles, WifiOff, Wifi } from 'lucide-react';
 import { useAssistant } from '../services/geminiService';
+import { useOnlineStatus } from '../hooks/useOnlineStatus';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 
@@ -8,17 +10,18 @@ interface Message {
   id: string;
   role: 'user' | 'assistant';
   content: string;
-  timestamp: Date;
+  timestamp: string; // Store as string for easy local storage serialization
 }
 
 export function Assistant() {
+  const isOnline = useOnlineStatus();
   const { askAssistant, loading, error } = useAssistant();
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages, setMessages] = useLocalStorage<Message[]>('mauntra_chat_history', [
     {
       id: '1',
       role: 'assistant',
       content: "Hello, I'm MAUNTRA Assistant. I'm here to offer supportive guidance and help you find the resources you need. How can I help you today?",
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
     }
   ]);
   const [input, setInput] = useState('');
@@ -28,7 +31,7 @@ export function Assistant() {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, loading]);
 
   const handleSend = async () => {
     if (!input.trim() || loading) return;
@@ -37,20 +40,21 @@ export function Assistant() {
       id: Date.now().toString(),
       role: 'user',
       content: input,
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentInput = input;
     setInput('');
 
-    const response = await askAssistant(input);
+    const response = await askAssistant(currentInput, isOnline);
     
     if (response) {
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
         content: response,
-        timestamp: new Date(),
+        timestamp: new Date().toISOString(),
       };
       setMessages(prev => [...prev, assistantMessage]);
     }
@@ -67,14 +71,27 @@ export function Assistant() {
           <div>
             <h3 className="font-bold text-slate-800 text-sm">MAUNTRA Assistant</h3>
             <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Secure & Private</span>
+              <div className={cn(
+                "w-1.5 h-1.5 rounded-full",
+                isOnline ? "bg-emerald-500 animate-pulse" : "bg-slate-300"
+              )} />
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                {isOnline ? "Secure & Private" : "Offline Mode"}
+              </span>
             </div>
           </div>
         </div>
-        <button className="p-2 text-slate-400 hover:text-primary transition-colors">
-          <Info className="w-5 h-5" />
-        </button>
+        <div className="flex items-center gap-2">
+          {!isOnline && (
+            <div className="flex items-center gap-1 px-2 py-1 bg-amber-50 text-amber-600 rounded-full border border-amber-100">
+              <WifiOff className="w-3 h-3" />
+              <span className="text-[9px] font-bold uppercase tracking-tight">Offline</span>
+            </div>
+          )}
+          <button className="p-2 text-slate-400 hover:text-primary transition-colors">
+            <Info className="w-5 h-5" />
+          </button>
+        </div>
       </div>
 
       {/* Messages Area */}
@@ -104,7 +121,7 @@ export function Assistant() {
                   "text-[10px] mt-2 font-medium opacity-60",
                   msg.role === 'user' ? "text-primary-light" : "text-slate-400"
                 )}>
-                  {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
               </div>
             </motion.div>
