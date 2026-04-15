@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, Send, Shield, Info, Loader2, User, Sparkles, WifiOff, Wifi } from 'lucide-react';
 import { useAssistant } from '../services/geminiService';
-import { useOnlineStatus } from '../hooks/useOnlineStatus';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useOnlineStatus } from '../components/hooks/useOnlineStatus';
+import { useLocalStorage } from '../components/hooks/useLocalStorage';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 

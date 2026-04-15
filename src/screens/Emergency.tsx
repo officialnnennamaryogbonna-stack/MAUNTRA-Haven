@@ -3,7 +3,7 @@ import { Phone, Zap, Shield, MessageSquare, AlertTriangle, ArrowRight, ShieldAle
 import { Contact, UserSettings, CustomEmergencyNumber } from '../types';
 import { EMERGENCY_INFO } from '../constants';
 import { motion, AnimatePresence } from 'motion/react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useLocalStorage } from '../components/hooks/useLocalStorage';
 import { cn } from '../lib/utils';
 import { Link } from 'react-router-dom';
 

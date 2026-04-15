@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Incident } from '../types';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useLocalStorage } from '../components/hooks/useLocalStorage';
 import { cn } from '../lib/utils';
 
 export function ReportIncident() {

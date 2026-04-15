@@ -4,7 +4,7 @@ import { AnimatePresence } from 'motion/react';
 import { Layout } from './Layout';
 import { Onboarding } from './components/Onboarding';
 import { SplashScreen } from './components/SplashScreen';
-import { useLocalStorage } from './hooks/useLocalStorage';
+import { useLocalStorage } from './components/hooks/useLocalStorage';
 import { UserSettings, Contact, Note } from './types';
 import { cn } from './lib/utils';
 

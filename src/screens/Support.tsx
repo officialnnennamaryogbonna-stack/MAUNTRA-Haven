@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SupportService, Incident, CallCenterContact } from '../types';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useLocalStorage } from '../components/hooks/useLocalStorage';
 
 export function Support() {
   const navigate = useNavigate();

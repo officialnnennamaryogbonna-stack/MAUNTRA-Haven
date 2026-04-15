@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, FileText, Calendar, Clock, MapPin, ShieldAlert, Trash2 } from 'lucide-react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useLocalStorage } from '../components/hooks/useLocalStorage';
 import { Incident } from '../types';
 import { cn } from '../lib/utils';
 
