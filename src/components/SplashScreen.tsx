@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Shield } from 'lucide-react';
 
 export const SplashScreen: React.FC = () => {
   return (
@@ -33,8 +32,13 @@ export const SplashScreen: React.FC = () => {
             }}
             className="absolute inset-0 bg-primary/20 rounded-full blur-2xl"
           />
-          <div className="relative bg-primary/10 p-6 rounded-3xl border border-primary/20">
-            <Shield className="w-16 h-16 text-primary" strokeWidth={1.5} />
+          <div className="relative bg-white p-4 rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
+            <img 
+              src="/logo.png" 
+              alt="MAUNTRA Haven Logo" 
+              className="w-24 h-24 object-contain"
+              referrerPolicy="no-referrer"
+            />
           </div>
         </div>
 
