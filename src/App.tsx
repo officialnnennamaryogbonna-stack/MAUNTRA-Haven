@@ -48,12 +48,13 @@ export default function App() {
 
   const handleQuickExit = () => {
     setIsExiting(true);
-    // Redirect to a neutral page
-    window.location.href = settings.quickExitRedirect;
+    // Use replace to prevent back-button trace and ensure immediate navigation
+    window.location.replace(settings.quickExitRedirect || 'https://www.google.com');
   };
 
   if (isExiting) {
-    return <div className="fixed inset-0 bg-white z-[1000] flex items-center justify-center text-slate-400">Redirecting...</div>;
+    // Show an empty white screen immediately to "hide" the app content
+    return <div className="fixed inset-0 bg-white z-[9999]" />;
   }
 
   return (

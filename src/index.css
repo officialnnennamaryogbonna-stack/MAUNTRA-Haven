@@ -3,9 +3,9 @@
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --color-primary: #C8A2C8;
-  --color-secondary: #ADD8E6;
-  --color-tertiary: #90EE90;
+  --color-primary: #8E44AD; /* Darker Purple for better contrast */
+  --color-secondary: #2980B9; /* Darker Blue */
+  --color-tertiary: #27AE60; /* Darker Green */
 }
 
 @layer base {

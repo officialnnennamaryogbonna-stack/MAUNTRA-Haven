@@ -15,7 +15,7 @@ interface Message {
 
 export function Assistant() {
   const isOnline = useOnlineStatus();
-  const { askAssistant, loading, error } = useAssistant();
+  const { askAssistantStream, loading, error } = useAssistant();
   const [messages, setMessages] = useLocalStorage<Message[]>('mauntra_chat_history', [
     {
       id: '1',
@@ -36,27 +36,45 @@ export function Assistant() {
   const handleSend = async () => {
     if (!input.trim() || loading) return;
 
+    const currentInput = input.trim();
     const userMessage: Message = {
       id: Date.now().toString(),
       role: 'user',
-      content: input,
+      content: currentInput,
       timestamp: new Date().toISOString(),
     };
 
+    // 1. Immediately show the user's message and clear input
     setMessages(prev => [...prev, userMessage]);
-    const currentInput = input;
     setInput('');
 
-    const response = await askAssistant(currentInput, isOnline);
-    
-    if (response) {
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: response,
-        timestamp: new Date().toISOString(),
-      };
-      setMessages(prev => [...prev, assistantMessage]);
+    // 2. Add an intentional short delay (300ms) to make it feel like 
+    // the AI is reacting "after" the message has arrived.
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    // 3. Create a placeholder for the assistant's streaming message
+    const assistantMessageId = (Date.now() + 1).toString();
+    const assistantMessage: Message = {
+      id: assistantMessageId,
+      role: 'assistant',
+      content: '',
+      timestamp: new Date().toISOString(),
+    };
+
+    setMessages(prev => [...prev, assistantMessage]);
+
+    // 4. Start streaming the response
+    let accumulatedContent = '';
+    const response = await askAssistantStream(currentInput, isOnline, (chunk) => {
+      accumulatedContent += chunk;
+      setMessages(prev => prev.map(msg => 
+        msg.id === assistantMessageId ? { ...msg, content: accumulatedContent } : msg
+      ));
+    });
+
+    // 5. If it failed completely and no content was streamed, remove the placeholder
+    if (!response && !accumulatedContent) {
+      setMessages(prev => prev.filter(msg => msg.id !== assistantMessageId));
     }
   };
 
@@ -88,7 +106,7 @@ export function Assistant() {
               <span className="text-[9px] font-bold uppercase tracking-tight">Offline</span>
             </div>
           )}
-          <button className="p-2 text-slate-400 hover:text-primary transition-colors">
+          <button className="p-2 text-slate-500 hover:text-primary transition-colors">
             <Info className="w-5 h-5" />
           </button>
         </div>
@@ -118,8 +136,8 @@ export function Assistant() {
               )}>
                 {msg.content}
                 <div className={cn(
-                  "text-[10px] mt-2 font-medium opacity-60",
-                  msg.role === 'user' ? "text-primary-light" : "text-slate-400"
+                  "text-[10px] mt-2 font-medium",
+                  msg.role === 'user' ? "text-white/70" : "text-slate-400"
                 )}>
                   {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
@@ -135,7 +153,11 @@ export function Assistant() {
             className="flex justify-start"
           >
             <div className="bg-white p-4 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm">
-              <Loader2 className="w-5 h-5 text-primary animate-spin" />
+              <div className="flex gap-1.5 items-center">
+                <div className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce" />
+                <div className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce [animation-delay:0.2s]" />
+                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce [animation-delay:0.4s]" />
+              </div>
             </div>
           </motion.div>
         )}
@@ -161,7 +183,12 @@ export function Assistant() {
           <button
             onClick={handleSend}
             disabled={!input.trim() || loading}
-            className="bg-primary text-white p-3 rounded-2xl shadow-lg shadow-primary/20 disabled:opacity-50 disabled:shadow-none transition-all active:scale-95"
+            className={cn(
+              "p-3 rounded-2xl transition-all active:scale-95 shadow-lg",
+              !input.trim() || loading
+                ? "bg-slate-100 text-slate-300 shadow-none cursor-not-allowed"
+                : "bg-primary text-white shadow-primary/20 hover:bg-primary/90"
+            )}
           >
             <Send className="w-5 h-5" />
           </button>

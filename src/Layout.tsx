@@ -18,8 +18,8 @@ export function Layout({ children, onQuickExit }: LayoutProps) {
           <h1 className="font-semibold text-slate-800 tracking-tight">MAUNTRA Haven</h1>
         </div>
         <button
-          onClick={onQuickExit}
-          className="bg-rose-500 hover:bg-rose-600 text-white px-3 py-1.5 rounded-full text-sm font-medium flex items-center gap-1.5 transition-colors shadow-sm"
+          onPointerDown={onQuickExit}
+          className="bg-rose-500 hover:bg-rose-600 active:bg-rose-700 text-white px-3 py-1.5 rounded-full text-sm font-medium flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
           aria-label="Quick Exit"
         >
           <XCircle className="w-4 h-4" />
