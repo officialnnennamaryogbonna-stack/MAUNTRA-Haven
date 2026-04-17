@@ -4,6 +4,7 @@ import { AnimatePresence } from 'motion/react';
 import { Layout } from './Layout';
 import { Onboarding } from './components/Onboarding';
 import { SplashScreen } from './components/SplashScreen';
+import { Login } from './components/Login';
 import { useLocalStorage } from './components/hooks/useLocalStorage';
 import { UserSettings, Contact, Note } from './types';
 import { cn } from './lib/utils';
@@ -38,6 +39,7 @@ export default function App() {
   const [notes, setNotes] = useLocalStorage<Note[]>('mauntra_notes', []);
   const [isExiting, setIsExiting] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -57,13 +59,27 @@ export default function App() {
     return <div className="fixed inset-0 bg-white z-[9999]" />;
   }
 
+  const handleLogin = (email: string) => {
+    setIsAuthenticated(true);
+    if (!settings.nickname) {
+      // Use the part before @ as a temporary nickname
+      const defaultNickname = email.split('@')[0];
+      setSettings(prev => ({ ...prev, nickname: defaultNickname }));
+    }
+  };
+
   return (
     <>
       <AnimatePresence>
         {showSplash && <SplashScreen key="splash" />}
       </AnimatePresence>
 
-      {!settings.onboarded ? (
+      {!isAuthenticated ? (
+        <Login 
+          onLogin={handleLogin} 
+          isFirstTime={!settings.onboarded} 
+        />
+      ) : !settings.onboarded ? (
         <Onboarding onComplete={(newSettings) => setSettings(newSettings)} />
       ) : (
         <Router>

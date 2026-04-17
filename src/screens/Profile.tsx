@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Shield, Bell, Eye, Phone, Plus, Trash2, ChevronRight, Globe, Heart, Palette, Info, Gamepad2, Star } from 'lucide-react';
+import { User, Shield, Bell, Eye, Phone, Plus, Trash2, ChevronRight, Globe, Heart, Palette, Info, Gamepad2, Star, LogOut, AlertCircle } from 'lucide-react';
 import { UserSettings, Contact } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
@@ -14,7 +14,14 @@ interface ProfileProps {
 
 export function Profile({ settings, setSettings, contacts, setContacts }: ProfileProps) {
   const [isAddingContact, setIsAddingContact] = useState(false);
+  const [confirmLogout, setConfirmLogout] = useState(false);
   const [newContact, setNewContact] = useState({ name: '', phone: '', relation: '' });
+
+  const handleLogout = () => {
+    // Reset settings to trigger onboarding and clear local data
+    localStorage.clear();
+    window.location.reload();
+  };
 
   const handleAddContact = () => {
     if (newContact.name && newContact.phone) {
@@ -225,9 +232,67 @@ export function Profile({ settings, setSettings, contacts, setContacts }: Profil
         </section>
       </div>
 
+      <div className="pt-4">
+        <button 
+          onClick={() => setConfirmLogout(true)}
+          className="w-full bg-rose-50 p-5 rounded-3xl border border-rose-100 flex items-center justify-center gap-3 text-rose-600 font-bold hover:bg-rose-100 transition-colors"
+        >
+          <LogOut className="w-5 h-5" />
+          Log Out
+        </button>
+      </div>
+
       <p className="text-center text-[10px] text-slate-400 uppercase tracking-widest font-bold pb-4">
         Created by Team MAUNTRA
       </p>
+
+      {/* Logout Confirmation Modal */}
+      <AnimatePresence>
+        {confirmLogout && (
+          <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setConfirmLogout(false)}
+              className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 100 }}
+              className="relative bg-white w-full max-w-sm rounded-[32px] p-6 shadow-2xl space-y-6"
+            >
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="w-16 h-16 bg-rose-50 rounded-full flex items-center justify-center">
+                  <AlertCircle className="w-8 h-8 text-rose-500" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold text-slate-900">Log Out?</h3>
+                  <p className="text-slate-500 text-sm">
+                    Logging out will clear all your locally saved data and incidents. This action cannot be undone.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={handleLogout}
+                  className="w-full bg-rose-500 text-white py-4 rounded-2xl font-bold shadow-lg shadow-rose-200 active:scale-95 transition-transform"
+                >
+                  Yes, Log Me Out
+                </button>
+                <button
+                  onClick={() => setConfirmLogout(false)}
+                  className="w-full bg-slate-100 text-slate-600 py-4 rounded-2xl font-bold active:scale-95 transition-transform"
+                >
+                  Cancel
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
