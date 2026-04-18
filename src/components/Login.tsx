@@ -8,8 +8,12 @@ interface LoginProps {
   isFirstTime?: boolean;
 }
 
-export function Login({ onLogin }: LoginProps) {
-  const [isLogin, setIsLogin] = useState(true);
+export function Login({ onLogin, isFirstTime = false }: LoginProps) {
+  // Check if an account already exists in storage
+  const hasAccount = !!localStorage.getItem('mauntra_auth_email');
+  
+  // Default to Login if an account exists, otherwise follow isFirstTime
+  const [isLogin, setIsLogin] = useState(hasAccount ? true : !isFirstTime);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);

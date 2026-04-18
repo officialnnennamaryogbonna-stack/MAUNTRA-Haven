@@ -68,6 +68,10 @@ export default function App() {
     }
   };
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
+
   return (
     <>
       <AnimatePresence>
@@ -99,7 +103,7 @@ export default function App() {
                 <Route path="/saved-incidents" element={<SavedIncidents />} />
                 <Route path="/community" element={<Community />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/profile" element={<Profile settings={settings} setSettings={setSettings} contacts={contacts} setContacts={setContacts} />} />
+                <Route path="/profile" element={<Profile settings={settings} setSettings={setSettings} contacts={contacts} setContacts={setContacts} onLogout={handleLogout} />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Layout>

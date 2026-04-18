@@ -10,17 +10,17 @@ interface ProfileProps {
   setSettings: (settings: UserSettings) => void;
   contacts: Contact[];
   setContacts: (contacts: Contact[]) => void;
+  onLogout: () => void;
 }
 
-export function Profile({ settings, setSettings, contacts, setContacts }: ProfileProps) {
+export function Profile({ settings, setSettings, contacts, setContacts, onLogout }: ProfileProps) {
   const [isAddingContact, setIsAddingContact] = useState(false);
   const [confirmLogout, setConfirmLogout] = useState(false);
   const [newContact, setNewContact] = useState({ name: '', phone: '', relation: '' });
 
   const handleLogout = () => {
-    // Reset settings to trigger onboarding and clear local data
-    localStorage.clear();
-    window.location.reload();
+    // Call the logout handler from props to return to login screen without reload
+    onLogout();
   };
 
   const handleAddContact = () => {
@@ -270,7 +270,7 @@ export function Profile({ settings, setSettings, contacts, setContacts }: Profil
                 <div className="space-y-1">
                   <h3 className="text-xl font-bold text-slate-900">Log Out?</h3>
                   <p className="text-slate-500 text-sm">
-                    Logging out will clear all your locally saved data and incidents. This action cannot be undone.
+                    Logging out will lock your vault. You will need your password to access your data again.
                   </p>
                 </div>
               </div>
