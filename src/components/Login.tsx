@@ -36,18 +36,29 @@ export function Login({ onLogin, isFirstTime = false }: LoginProps) {
 
     if (!isLogin) {
       // Sign Up
-      localStorage.setItem('mauntra_auth_email', email.trim().toLowerCase());
+      const users = JSON.parse(localStorage.getItem('mauntra_users') || '{}');
+      const normalizedEmail = email.trim().toLowerCase();
+      
+      // Save to centralized users map
+      users[normalizedEmail] = password;
+      localStorage.setItem('mauntra_users', JSON.stringify(users));
+      
+      // Also maintain these for legacy compatibility/checks
+      localStorage.setItem('mauntra_auth_email', normalizedEmail);
       localStorage.setItem('mauntra_auth_password', password);
+      
       onLogin(email);
     } else {
       // Login
-      const storedEmail = localStorage.getItem('mauntra_auth_email');
-      const storedPass = localStorage.getItem('mauntra_auth_password');
+      const users = JSON.parse(localStorage.getItem('mauntra_users') || '{}');
+      const normalizedEmail = email.trim().toLowerCase();
 
-      if (email.trim().toLowerCase() === storedEmail && password === storedPass) {
-        onLogin(email);
+      if (!users[normalizedEmail]) {
+        setError('Account not found. Please check your email or sign up.');
+      } else if (users[normalizedEmail] !== password) {
+        setError('Incorrect password. Please try again.');
       } else {
-        setError('Incorrect email or password');
+        onLogin(email);
       }
     }
   };

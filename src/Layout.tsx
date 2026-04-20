@@ -33,12 +33,12 @@ export function Layout({ children, onQuickExit }: LayoutProps) {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-slate-100 px-1 py-3 flex justify-around items-center z-50">
-        <NavButton to="/" icon={<Home className="w-5 h-5" />} label="Home" />
-        <NavButton to="/emergency" icon={<Phone className="w-5 h-5" />} label="Emergency" />
-        <NavButton to="/community" icon={<Users className="w-5 h-5" />} label="Community" />
-        <NavButton to="/assistant" icon={<MessageSquare className="w-5 h-5" />} label="Assistant" />
-        <NavButton to="/profile" icon={<User className="w-5 h-5" />} label="Profile" />
+      <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-slate-100 px-2 pt-2 pb-[calc(1rem+env(safe-area-inset-bottom))] flex justify-between items-center z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] focus-within:ring-0">
+        <NavButton to="/" icon={<Home className="w-5 h-5 md:w-6 md:h-6" />} label="Home" />
+        <NavButton to="/emergency" icon={<Phone className="w-5 h-5 md:w-6 md:h-6" />} label="SOS" />
+        <NavButton to="/community" icon={<Users className="w-5 h-5 md:w-6 md:h-6" />} label="Social" />
+        <NavButton to="/assistant" icon={<MessageSquare className="w-5 h-5 md:w-6 md:h-6" />} label="Help" />
+        <NavButton to="/profile" icon={<User className="w-5 h-5 md:w-6 md:h-6" />} label="You" />
       </nav>
     </div>
   );
@@ -50,13 +50,17 @@ function NavButton({ to, icon, label }: { to: string; icon: React.ReactNode; lab
       to={to}
       className={({ isActive }) =>
         cn(
-          "flex flex-col items-center gap-1 transition-colors px-3 py-1 rounded-xl",
-          isActive ? "text-primary bg-primary/10" : "text-slate-400 hover:text-slate-600"
+          "flex flex-col items-center gap-1 transition-all px-2 py-1.5 rounded-xl flex-1 max-w-[72px] text-center",
+          isActive ? "text-primary bg-primary/5" : "text-slate-400 hover:text-slate-600 active:scale-90"
         )
       }
     >
-      {icon}
-      <span className="text-[10px] font-bold uppercase tracking-wider">{label}</span>
+      <div className="flex items-center justify-center h-6 w-6">
+        {icon}
+      </div>
+      <span className="text-[9px] font-bold uppercase tracking-tight whitespace-nowrap overflow-hidden text-ellipsis w-full">
+        {label}
+      </span>
     </NavLink>
   );
 }
