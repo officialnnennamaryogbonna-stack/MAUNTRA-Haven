@@ -179,10 +179,10 @@ export default function App() {
               <button
                 onClick={toggleSafeMode}
                 className={cn(
-                  "w-10 h-10 rounded-full flex items-center justify-center text-[8px] font-black tracking-tighter transition-all active:scale-90",
+                  "w-10 h-10 rounded-full flex items-center justify-center text-[8px] font-black tracking-tighter transition-all active:scale-90 shadow-lg",
                   isSafeMode 
-                    ? "bg-white/5 text-white/70 hover:bg-white/10 opacity-70" 
-                    : "bg-primary/20 text-primary border border-primary/30 shadow-md"
+                    ? "bg-[#D946EF] text-white hover:bg-[#C026D3] border border-white/20" 
+                    : "bg-primary/20 text-primary border border-primary/30"
                 )}
                 aria-label="Toggle Mode"
               >

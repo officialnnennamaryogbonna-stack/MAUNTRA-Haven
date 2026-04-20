@@ -61,7 +61,7 @@ export function Community() {
                     <p className="text-sm text-slate-600 leading-relaxed italic">"{story.content}"</p>
                     <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden relative group">
                       <iframe 
-                        src={story.videoUrl} 
+                        src={story.videoUrl || null} 
                         className="w-full h-full" 
                         title="Survivor Story"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -143,7 +143,7 @@ export function Community() {
               <div key={video.id} className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden group">
                 <div className="aspect-video relative">
                   <img 
-                    src={video.thumbnail} 
+                    src={video.thumbnail || null} 
                     alt={video.title} 
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"

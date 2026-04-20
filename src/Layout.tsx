@@ -35,10 +35,10 @@ export function Layout({ children, onQuickExit }: LayoutProps) {
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-slate-100 px-2 pt-2 pb-[calc(1rem+env(safe-area-inset-bottom))] flex justify-between items-center z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] focus-within:ring-0">
         <NavButton to="/" icon={<Home className="w-5 h-5 md:w-6 md:h-6" />} label="Home" />
-        <NavButton to="/emergency" icon={<Phone className="w-5 h-5 md:w-6 md:h-6" />} label="SOS" />
-        <NavButton to="/community" icon={<Users className="w-5 h-5 md:w-6 md:h-6" />} label="Social" />
-        <NavButton to="/assistant" icon={<MessageSquare className="w-5 h-5 md:w-6 md:h-6" />} label="Help" />
-        <NavButton to="/profile" icon={<User className="w-5 h-5 md:w-6 md:h-6" />} label="You" />
+        <NavButton to="/emergency" icon={<Phone className="w-5 h-5 md:w-6 md:h-6" />} label="Emergency" />
+        <NavButton to="/community" icon={<Users className="w-5 h-5 md:w-6 md:h-6" />} label="Community" />
+        <NavButton to="/assistant" icon={<MessageSquare className="w-5 h-5 md:w-6 md:h-6" />} label="Assistant" />
+        <NavButton to="/profile" icon={<User className="w-5 h-5 md:w-6 md:h-6" />} label="Profile" />
       </nav>
     </div>
   );
